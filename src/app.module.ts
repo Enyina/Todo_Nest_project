@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { TodoModule } from './todo/todo.module';
+import { config } from 'dotenv';
+
+config();
 
 @Module({
   imports: [
-    MongooseModule.forRoot(
-      'mongodb+srv://cranell:cranell@officialwork.nqbjgvi.mongodb.net/moshop?retryWrites=true&w=majority',
-    ),
+    MongooseModule.forRoot(process.env.MONGODB_CONNECTION_STRING),
     TodoModule,
   ],
 })
