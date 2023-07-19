@@ -6,13 +6,29 @@ This is a simple API for managing todos.
 
 - Node.js
 - MongoDB
+- Docker (optional)
 
 ## Installation
 
 1. Clone the repository.
 2. Install dependencies by running `npm install`.
-3. Set up the MongoDB connection by replacing the `url` in `src/main.ts` with your MongoDB connection URL.
-4. Start the server by running `npm run start`.
+
+## Configuration
+
+The application requires a MongoDB connection string. You can provide it through either of the following methods:
+
+- **Method 1: Environment Variable (Recommended)**
+  1. Create a `.env` file in the root directory.
+  2. Add the following line to the `.env` file:
+     ```
+     MONGODB_CONNECTION_STRING=<your-connection-string>
+     ```
+  3. Replace `<your-connection-string>` with your actual MongoDB connection string.
+
+- **Method 2: Directly in Code**
+  1. Open `src/app.module.ts`.
+  2. Locate the `MongooseModule.forRoot()` method call.
+  3. Replace the connection string argument with your MongoDB connection string.
 
 ## API Endpoints
 
@@ -37,9 +53,14 @@ This is a simple API for managing todos.
 - **Method**: `DELETE`
 - **URL Params**: `id=[string]`
 
-## Testing
+### Running Locally
 
-To run the tests, execute the following command:
+1. Start the server by running `npm run start`.
+2. The API will be available at `http://localhost:5001`.
 
-```shell
-npm run test
+### Docker
+You can also run the application using Docker:
+
+1. Build the Docker image:
+   ```shell
+   docker build -t todo .
